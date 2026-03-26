@@ -11,7 +11,7 @@
     Legend,
   } from 'chart.js';
   import chartjs2music from 'chartjs-plugin-chart2music';
-  import npmDownloads from './assets/chart2music-npm-downloads.json';
+  import npmDownloads from '../assets/chart2music-npm-downloads.json';
 
   ChartJS.register(LineElement, PointElement, LinearScale, CategoryScale, Title, Tooltip, Legend, chartjs2music);
 
