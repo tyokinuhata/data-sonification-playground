@@ -39,6 +39,7 @@
   };
 
   let ccEl: HTMLElement;
+  let chartWrapperEl: HTMLDivElement;
 
   // chartjs-plugin-chart2music does not augment Chart.js types
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -50,11 +51,19 @@
       },
     },
   };
+
+  function play() {
+    const canvas = chartWrapperEl.querySelector('canvas');
+    if (!canvas) return;
+    canvas.focus();
+    canvas.dispatchEvent(new KeyboardEvent('keydown', { key: 'End', shiftKey: true }));
+  }
 </script>
 
 <main>
-  <div style="width: 800px">
+  <div bind:this={chartWrapperEl} style="width: 800px">
     <Line {data} {options} />
   </div>
+  <button onclick={play}>▶ Play</button>
   <div bind:this={ccEl}></div>
 </main>
