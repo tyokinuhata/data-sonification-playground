@@ -47,7 +47,6 @@
     plugins: {
       chartjs2music: {
         cc: ccEl!,
-        errorCallback: console.error,
       },
     },
   };
