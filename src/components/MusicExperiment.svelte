@@ -28,6 +28,10 @@
   };
 
   const options = {
+    plugins: {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      chartjs2music: false as any,
+    },
     scales: {
       y: {
         ticks: {
