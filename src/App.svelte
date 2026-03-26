@@ -10,9 +10,10 @@
     Tooltip,
     Legend,
   } from 'chart.js';
+  import chartjs2music from 'chartjs-plugin-chart2music';
   import npmDownloads from './assets/chart2music-npm-downloads.json';
 
-  ChartJS.register(LineElement, PointElement, LinearScale, CategoryScale, Title, Tooltip, Legend);
+  ChartJS.register(LineElement, PointElement, LinearScale, CategoryScale, Title, Tooltip, Legend, chartjs2music);
 
   type Week = { label: string; downloads: number };
 
@@ -36,10 +37,24 @@
       },
     ],
   };
+
+  let ccEl: HTMLElement;
+
+  // chartjs-plugin-chart2music does not augment Chart.js types
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const options: any = {
+    plugins: {
+      chartjs2music: {
+        cc: ccEl!,
+        errorCallback: console.error,
+      },
+    },
+  };
 </script>
 
 <main>
   <div style="width: 800px">
-    <Line {data} />
+    <Line {data} {options} />
   </div>
+  <div bind:this={ccEl}></div>
 </main>
