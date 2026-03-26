@@ -1,6 +1,6 @@
 <script lang="ts">
-  import DataSonification from './DataSonification.svelte';
-  import MusicExperiment from './MusicExperiment.svelte';
+  import DataSonification from './components/DataSonification.svelte';
+  import MusicExperiment from './components/MusicExperiment.svelte';
 
   type Tab = 'data-sonification' | 'music-experiment';
   let activeTab: Tab = $state('data-sonification');
