@@ -10,7 +10,7 @@ function playNote(midi: number, gain: number) {
   osc.frequency.value = midiToHz(midi);
   osc.connect(gainNode).connect(audioCtx.destination);
   osc.start();
-  osc.stop(audioCtx.currentTime + 0.2);
+  osc.stop(audioCtx.currentTime + 0.8);
 }
 
 export function play(melody: number, chord: number[]) {

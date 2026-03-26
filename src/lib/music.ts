@@ -13,13 +13,15 @@ export const notes: Note[] = [
   { beat: 5,  melody: 69, chord: [57, 60, 64] }, // A - Am
   { beat: 6,  melody: 69, chord: [57, 60, 64] }, // A - Am
   { beat: 7,  melody: 67, chord: [55, 59, 62] }, // G - G major
-  { beat: 8,  melody: 65, chord: [53, 57, 60] }, // F - F major
+  { beat: 8,  melody: 67, chord: [55, 59, 62] }, // G - G major (2nd beat)
   { beat: 9,  melody: 65, chord: [53, 57, 60] }, // F - F major
-  { beat: 10, melody: 64, chord: [48, 52, 55] }, // E - C major
+  { beat: 10, melody: 65, chord: [53, 57, 60] }, // F - F major
   { beat: 11, melody: 64, chord: [48, 52, 55] }, // E - C major
-  { beat: 12, melody: 62, chord: [55, 59, 62] }, // D - G major
+  { beat: 12, melody: 64, chord: [48, 52, 55] }, // E - C major
   { beat: 13, melody: 62, chord: [55, 59, 62] }, // D - G major
-  { beat: 14, melody: 60, chord: [48, 52, 55] }, // C - C major
+  { beat: 14, melody: 62, chord: [55, 59, 62] }, // D - G major
+  { beat: 15, melody: 60, chord: [48, 52, 55] }, // C - C major
+  { beat: 16, melody: 60, chord: [48, 52, 55] }, // C - C major (2nd beat)
 ];
 
 export const allUsedMidi = [...new Set([

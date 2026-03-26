@@ -71,6 +71,11 @@
     const canvas = chartWrapperEl.querySelector('canvas');
     if (!canvas) return;
     canvas.focus();
+    // E key slows down playback (SPEEDS: [1000, 250, 100, 50, 25]ms, default index=1)
+    // Send 4 times to ensure slowest speed (index 0 = 1000ms) from any state
+    for (let i = 0; i < 4; i++) {
+      canvas.dispatchEvent(new KeyboardEvent('keydown', { key: 'e' }));
+    }
     canvas.dispatchEvent(new KeyboardEvent('keydown', { key: 'End', shiftKey: true }));
   }
 </script>
