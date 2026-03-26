@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
   import { Line } from 'svelte-chartjs';
   import {
     Chart as ChartJS,
@@ -10,6 +11,7 @@
     Tooltip,
     Legend,
   } from 'chart.js';
+  import { c2mChart } from 'chart2music';
   import { notes, allUsedMidi, midiToNoteName } from '../lib/music';
   import { play } from '../lib/audio';
 
@@ -36,9 +38,41 @@
       },
     },
   };
+
+  let ccEl: HTMLElement;
+  let chartWrapperEl: HTMLDivElement;
+
+  onMount(() => {
+    const canvas = chartWrapperEl.querySelector('canvas');
+    if (!canvas) return;
+
+    c2mChart({
+      type: 'line',
+      element: canvas,
+      data: notes.map(n => n.melody),
+      cc: ccEl,
+      options: {
+        enableSound: false,
+        onFocusCallback: ({ index }) => {
+          play(notes[index].melody, notes[index].chord);
+          const chart = ChartJS.getChart(canvas);
+          chart?.setActiveElements([{ datasetIndex: 0, index }]);
+          chart?.update();
+        },
+      },
+    });
+  });
+
+  function playAll() {
+    const canvas = chartWrapperEl.querySelector('canvas');
+    if (!canvas) return;
+    canvas.focus();
+    canvas.dispatchEvent(new KeyboardEvent('keydown', { key: 'End', shiftKey: true }));
+  }
 </script>
 
-<div style="width: 800px">
+<div bind:this={chartWrapperEl} style="width: 800px">
   <Line {data} {options} />
 </div>
-<button onclick={() => play(notes[0].melody, notes[0].chord)}>▶ beat 1 を再生</button>
+<button onclick={playAll}>▶ Play</button>
+<div bind:this={ccEl}></div>
