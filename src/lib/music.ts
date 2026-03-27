@@ -83,9 +83,50 @@ const tulip: Song = [
   { beat: 47, melody: 60, chord: [48, 52, 55] }, // C4
 ];
 
+// Mary Had a Little Lamb - C major (4/4拍子、半音符は2拍分繰り返す)
+const mary: Song = [
+  // "Mary had a little lamb" (E D C D | E E E.)
+  { beat: 1,  melody: 64, chord: [48, 52, 55] }, // E4 - Ma-
+  { beat: 2,  melody: 62, chord: [55, 59, 62] }, // D4 - ry
+  { beat: 3,  melody: 60, chord: [48, 52, 55] }, // C4 - had
+  { beat: 4,  melody: 62, chord: [55, 59, 62] }, // D4 - a
+  { beat: 5,  melody: 64, chord: [48, 52, 55] }, // E4 - lit-
+  { beat: 6,  melody: 64, chord: [48, 52, 55] }, // E4 - tle
+  { beat: 7,  melody: 64, chord: [48, 52, 55] }, // E4 - lamb (半音符)
+  { beat: 8,  melody: 64, chord: [48, 52, 55] }, // E4
+  // "little lamb, little lamb" (D D D. | E G G.)
+  { beat: 9,  melody: 62, chord: [55, 59, 62] }, // D4 - lit-
+  { beat: 10, melody: 62, chord: [55, 59, 62] }, // D4 - tle
+  { beat: 11, melody: 62, chord: [55, 59, 62] }, // D4 - lamb (半音符)
+  { beat: 12, melody: 62, chord: [55, 59, 62] }, // D4
+  { beat: 13, melody: 64, chord: [48, 52, 55] }, // E4 - lit-
+  { beat: 14, melody: 67, chord: [55, 59, 62] }, // G4 - tle
+  { beat: 15, melody: 67, chord: [55, 59, 62] }, // G4 - lamb (半音符)
+  { beat: 16, melody: 67, chord: [55, 59, 62] }, // G4
+  // "Mary had a little lamb" (E D C D | E E E E)
+  { beat: 17, melody: 64, chord: [48, 52, 55] }, // E4 - Ma-
+  { beat: 18, melody: 62, chord: [55, 59, 62] }, // D4 - ry
+  { beat: 19, melody: 60, chord: [48, 52, 55] }, // C4 - had
+  { beat: 20, melody: 62, chord: [55, 59, 62] }, // D4 - a
+  { beat: 21, melody: 64, chord: [48, 52, 55] }, // E4 - lit-
+  { beat: 22, melody: 64, chord: [48, 52, 55] }, // E4 - tle
+  { beat: 23, melody: 64, chord: [48, 52, 55] }, // E4 - lamb
+  { beat: 24, melody: 64, chord: [48, 52, 55] }, // E4
+  // "whose fleece was white as snow" (D D E D | C...)
+  { beat: 25, melody: 62, chord: [55, 59, 62] }, // D4 - whose
+  { beat: 26, melody: 62, chord: [55, 59, 62] }, // D4 - fleece
+  { beat: 27, melody: 64, chord: [48, 52, 55] }, // E4 - was
+  { beat: 28, melody: 62, chord: [55, 59, 62] }, // D4 - white
+  { beat: 29, melody: 60, chord: [48, 52, 55] }, // C4 - as (全音符)
+  { beat: 30, melody: 60, chord: [48, 52, 55] }, // C4
+  { beat: 31, melody: 60, chord: [48, 52, 55] }, // C4
+  { beat: 32, melody: 60, chord: [48, 52, 55] }, // C4 - snow
+];
+
 export const songs: Record<string, Song> = {
   'Twinkle Twinkle': twinkle,
   'Tulip': tulip,
+  'Mary Had a Little Lamb': mary,
 };
 
 export function allUsedMidi(song: Song): number[] {
