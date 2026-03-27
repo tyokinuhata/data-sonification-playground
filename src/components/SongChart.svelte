@@ -10,6 +10,7 @@
     Title,
     Tooltip,
     Legend,
+    type TooltipItem,
   } from 'chart.js';
   import { c2mChart } from 'chart2music';
   import { type Song, allUsedMidi, midiToNoteName } from '../lib/music';
@@ -32,6 +33,11 @@
   const chartOptions = $derived({
     plugins: {
       chartjs2music: false as any,
+      tooltip: {
+        callbacks: {
+          label: (ctx: TooltipItem<'line'>) => `${ctx.dataset.label}: ${midiToNoteName(ctx.parsed.y)}`,
+        },
+      },
     },
     scales: {
       y: {
