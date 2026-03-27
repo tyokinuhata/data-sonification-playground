@@ -1,16 +1,31 @@
 const midiToHz = (midi: number) => 440 * Math.pow(2, (midi - 69) / 12);
 
 let audioCtx: AudioContext;
+let compressor: DynamicsCompressorNode;
+
+function getAudioCtx() {
+  if (!audioCtx) {
+    audioCtx = new AudioContext();
+    compressor = audioCtx.createDynamicsCompressor();
+    compressor.connect(audioCtx.destination);
+  }
+  return audioCtx;
+}
 
 function playNote(midi: number, gain: number) {
-  audioCtx ??= new AudioContext();
-  const osc = audioCtx.createOscillator();
-  const gainNode = audioCtx.createGain();
-  gainNode.gain.value = gain;
+  const ctx = getAudioCtx();
+  const osc = ctx.createOscillator();
+  const gainNode = ctx.createGain();
+
   osc.frequency.value = midiToHz(midi);
-  osc.connect(gainNode).connect(audioCtx.destination);
+  gainNode.gain.value = gain;
+
+  // signal chain: osc → gain → compressor → destination
+  osc.connect(gainNode);
+  gainNode.connect(compressor);
+
   osc.start();
-  osc.stop(audioCtx.currentTime + 0.8);
+  osc.stop(ctx.currentTime + 0.8);
 }
 
 export function play(melody: number, chord: number[]) {
