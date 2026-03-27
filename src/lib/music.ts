@@ -4,8 +4,10 @@ export type Note = {
   chord: number[];
 };
 
-// Twinkle Twinkle Little Star (first phrase)
-export const notes: Note[] = [
+export type Song = Note[];
+
+// Twinkle Twinkle Little Star (first phrase, C major)
+const twinkle: Song = [
   { beat: 1,  melody: 60, chord: [48, 52, 55] }, // C - C major
   { beat: 2,  melody: 60, chord: [48, 52, 55] }, // C - C major
   { beat: 3,  melody: 67, chord: [55, 59, 62] }, // G - G major
@@ -24,10 +26,74 @@ export const notes: Note[] = [
   { beat: 16, melody: 60, chord: [48, 52, 55] }, // C - C major (2nd beat)
 ];
 
-export const allUsedMidi = [...new Set([
-  ...notes.map(n => n.melody),
-  ...notes.flatMap(n => n.chord),
-])];
+// チューリップ - C major (ヨナ抜き：C D E G A のみ使用)
+const tulip: Song = [
+  // "さいた さいた"
+  { beat: 1,  melody: 60, chord: [48, 52, 55] }, // C4 - さ
+  { beat: 2,  melody: 62, chord: [48, 52, 55] }, // D4 - い
+  { beat: 3,  melody: 64, chord: [48, 52, 55] }, // E4 - た (held)
+  { beat: 4,  melody: 64, chord: [48, 52, 55] }, // E4
+  { beat: 5,  melody: 60, chord: [48, 52, 55] }, // C4 - さ
+  { beat: 6,  melody: 62, chord: [48, 52, 55] }, // D4 - い
+  { beat: 7,  melody: 64, chord: [48, 52, 55] }, // E4 - た (held)
+  { beat: 8,  melody: 64, chord: [48, 52, 55] }, // E4
+  // "チューリップのはなが" G E D C D E D
+  { beat: 9,  melody: 67, chord: [55, 59, 62] }, // G4 - チュー
+  { beat: 10, melody: 64, chord: [48, 52, 55] }, // E4 - リッ
+  { beat: 11, melody: 62, chord: [55, 59, 62] }, // D4 - プ
+  { beat: 12, melody: 60, chord: [48, 52, 55] }, // C4 - の
+  { beat: 13, melody: 62, chord: [55, 59, 62] }, // D4 - は
+  { beat: 14, melody: 64, chord: [48, 52, 55] }, // E4 - な
+  { beat: 15, melody: 62, chord: [55, 59, 62] }, // D4 - が (held)
+  { beat: 16, melody: 62, chord: [55, 59, 62] }, // D4
+  // "ならんだ ならんだ" (さいた と同じメロディ)
+  { beat: 17, melody: 60, chord: [48, 52, 55] }, // C4 - な
+  { beat: 18, melody: 62, chord: [48, 52, 55] }, // D4 - ら
+  { beat: 19, melody: 64, chord: [48, 52, 55] }, // E4 - ん (held)
+  { beat: 20, melody: 64, chord: [48, 52, 55] }, // E4
+  { beat: 21, melody: 60, chord: [48, 52, 55] }, // C4 - な
+  { beat: 22, melody: 62, chord: [48, 52, 55] }, // D4 - ら
+  { beat: 23, melody: 64, chord: [48, 52, 55] }, // E4 - ん (held)
+  { beat: 24, melody: 64, chord: [48, 52, 55] }, // E4
+  // "あかしろきいろ" G E D C D E C
+  { beat: 25, melody: 67, chord: [55, 59, 62] }, // G4 - あ
+  { beat: 26, melody: 64, chord: [48, 52, 55] }, // E4 - か
+  { beat: 27, melody: 62, chord: [55, 59, 62] }, // D4 - し
+  { beat: 28, melody: 60, chord: [48, 52, 55] }, // C4 - ろ
+  { beat: 29, melody: 62, chord: [55, 59, 62] }, // D4 - き
+  { beat: 30, melody: 64, chord: [48, 52, 55] }, // E4 - い
+  { beat: 31, melody: 60, chord: [48, 52, 55] }, // C4 - ろ (held)
+  { beat: 32, melody: 60, chord: [48, 52, 55] }, // C4
+  // "どのはなみても" G G E G A A G
+  { beat: 33, melody: 67, chord: [55, 59, 62] }, // G4 - ど
+  { beat: 34, melody: 67, chord: [55, 59, 62] }, // G4 - の
+  { beat: 35, melody: 64, chord: [48, 52, 55] }, // E4 - は
+  { beat: 36, melody: 67, chord: [55, 59, 62] }, // G4 - な
+  { beat: 37, melody: 69, chord: [57, 60, 64] }, // A4 - み
+  { beat: 38, melody: 69, chord: [57, 60, 64] }, // A4 - て
+  { beat: 39, melody: 67, chord: [55, 59, 62] }, // G4 - も (held)
+  { beat: 40, melody: 67, chord: [55, 59, 62] }, // G4
+  // "きれいだな" E E D D C
+  { beat: 41, melody: 64, chord: [48, 52, 55] }, // E4 - き
+  { beat: 42, melody: 64, chord: [48, 52, 55] }, // E4 - れ
+  { beat: 43, melody: 62, chord: [55, 59, 62] }, // D4 - い
+  { beat: 44, melody: 62, chord: [55, 59, 62] }, // D4 - だ
+  { beat: 45, melody: 60, chord: [48, 52, 55] }, // C4 - な (held)
+  { beat: 46, melody: 60, chord: [48, 52, 55] }, // C4
+  { beat: 47, melody: 60, chord: [48, 52, 55] }, // C4
+];
+
+export const songs: Record<string, Song> = {
+  'Twinkle Twinkle': twinkle,
+  'Tulip': tulip,
+};
+
+export function allUsedMidi(song: Song): number[] {
+  return [...new Set([
+    ...song.map(note => note.melody),
+    ...song.flatMap(note => note.chord),
+  ])];
+}
 
 export function midiToNoteName(midi: number): string {
   const noteNames = ['C', 'C#', 'D', 'Eb', 'E', 'F', 'F#', 'G', 'Ab', 'A', 'Bb', 'B'];
