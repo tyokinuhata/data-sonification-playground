@@ -12,20 +12,31 @@ function getAudioCtx() {
   return audioCtx;
 }
 
+function scheduleEnvelope(gainNode: GainNode, peak: number, now: number, duration: number) {
+  const attack = 0.01;
+  const release = 0.1;
+  gainNode.gain.setValueAtTime(0, now);
+  gainNode.gain.linearRampToValueAtTime(peak, now + attack);
+  gainNode.gain.setValueAtTime(peak, now + duration - release);
+  gainNode.gain.linearRampToValueAtTime(0, now + duration);
+}
+
 function playNote(midi: number, gain: number) {
   const ctx = getAudioCtx();
+  const now = ctx.currentTime;
+  const duration = 0.8;
   const osc = ctx.createOscillator();
   const gainNode = ctx.createGain();
 
   osc.frequency.value = midiToHz(midi);
-  gainNode.gain.value = gain;
+  scheduleEnvelope(gainNode, gain, now, duration);
 
   // signal chain: osc → gain → compressor → destination
   osc.connect(gainNode);
   gainNode.connect(compressor);
 
-  osc.start();
-  osc.stop(ctx.currentTime + 0.8);
+  osc.start(now);
+  osc.stop(now + duration);
 }
 
 export function play(melody: number, chord: number[]) {
